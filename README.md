@@ -22,14 +22,10 @@ Sebelum memulai setup, pastikan di mesin kamu terpasang:
 1. ### Clone Repository  
    Pertama-tama, clone repositori ke lokal:
    ```bash
-   git clone https://github.com/<username-mu>/<nama-repo>.git
+   git clone https://github.com/SabilMurti/Manajemen-RT-Laravel-Appscript.git
    cd <nama-repo>
    ```
-   Atau dengan SSH:
-   ```bash
-   git clone git@github.com:<username-mu>/<nama-repo>.git
-   cd <nama-repo>
-   ```
+
 
 2. ### Buat `​.env`   
    Copy file contoh `.env.example` menjadi `.env`:
@@ -52,20 +48,6 @@ Sebelum memulai setup, pastikan di mesin kamu terpasang:
    DB_USERNAME=root
    DB_PASSWORD=
 
-   # Jika menggunakan SQLite:
-   # DB_CONNECTION=sqlite
-   # DB_DATABASE=/path/ke/database.sqlite
-
-   # Mail (opsional)
-   MAIL_MAILER=smtp
-   MAIL_HOST=smtp.mailtrap.io
-   MAIL_PORT=2525
-   MAIL_USERNAME=null
-   MAIL_PASSWORD=null
-   MAIL_ENCRYPTION=null
-   MAIL_FROM_ADDRESS="hello@example.com"
-   MAIL_FROM_NAME="${APP_NAME}"
-   ```
 
 3. ### Install Dependensi PHP (Composer)  
    Jalankan perintah berikut untuk mengunduh semua paket Laravel 12 dan dependensi lain:
@@ -132,25 +114,6 @@ Sebelum memulai setup, pastikan di mesin kamu terpasang:
    ```
    Lihat file seeder di `database/seeders` untuk detail username/password default (jika ada).
 
-10. ### (Opsional) Setup `.gitattributes` untuk Line Ending  
-    Agar **warning “CRLF will be replaced by LF”** tidak muncul, buat file `.gitattributes` di root project dengan isi minimal:
-    ```
-    *.php   text eol=lf
-    *.js    text eol=lf
-    *.jsx   text eol=lf
-    *.ts    text eol=lf
-    *.tsx   text eol=lf
-    *.json  text eol=lf
-    *.md    text eol=lf
-    ```
-    Lalu jalankan:
-    ```bash
-    git rm --cached -r .
-    git reset --hard
-    ```
-    Supaya Git menormalisasi semua file ke LF.
-
----
 
 ## Ringkasan Perintah Penting
 
