@@ -17,7 +17,7 @@ class WargaFormController extends Controller
         $user = Auth::user();
         // Jika sudah approved, redirect ke dashboard warga
         if ($user->status === \App\Models\User::STATUS_APPROVED) {
-            return redirect()->route('dashboard');
+            return redirect()->route('home');
         }
 
         // Cek jika data di spreadsheet sudah ada (misal via service)

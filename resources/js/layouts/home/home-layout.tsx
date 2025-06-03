@@ -33,7 +33,7 @@ const HomeLayout: React.FC<UserLayoutProps> = ({ children, title = 'RT Warga' })
 
     // Navigation items for regular users
     const navigationItems = [
-        { href: '/dashboard', icon: 'bi-house-fill', label: 'Home', active: window.location.pathname === '/dashboard' },
+        { href: '/home', icon: 'bi-house-fill', label: 'Home', active: window.location.pathname === '/home' },
         { href: '/pengumuman', icon: 'bi-megaphone-fill', label: 'Pengumuman', active: window.location.pathname.includes('/pengumuman') },
         { href: '/laporan', icon: 'bi-file-earmark-text-fill', label: 'Laporan', active: window.location.pathname.includes('/laporan') },
         { href: '/pinjam-barang', icon: 'bi-box-seam-fill', label: 'Pinjam Barang', active: window.location.pathname.includes('/pinjam-barang') },
@@ -97,8 +97,7 @@ const HomeLayout: React.FC<UserLayoutProps> = ({ children, title = 'RT Warga' })
                                     </button>
                                     <ul className="dropdown-menu dropdown-menu-end">
                                         <li><h6 className="dropdown-header">{user?.email}</h6></li>
-                                        <li><Link className="dropdown-item" href="/profile"><i className="bi bi-person me-2"></i>Profile Saya</Link></li>
-                                        <li><Link className="dropdown-item" href="/settings"><i className="bi bi-gear me-2"></i>Pengaturan</Link></li>
+                                       
                                         <li><hr className="dropdown-divider" /></li>
                                         <li>
                                             <Link href="/logout" method="post" as="button" className="dropdown-item text-danger">
@@ -156,53 +155,7 @@ const HomeLayout: React.FC<UserLayoutProps> = ({ children, title = 'RT Warga' })
                 </footer> */}
 
                 {/* CuteFish Style Dock Navigation */}
-                <nav className="dock-navigation">
-                    <div className="dock-container">
-                        {navigationItems.map((item, index) => (
-                            <Link
-                                key={index}
-                                href={item.href}
-                                className={`dock-item ${item.active ? 'active' : ''}`}
-                                title={item.label}
-                            >
-                                <div className="dock-icon">
-                                    <i className={`${item.icon}`}></i>
-                                </div>
-                                <span className="dock-label">{item.label}</span>
-                                {item.active && <div className="dock-indicator"></div>}
-                            </Link>
-                        ))}
-
-                        {/* Dock Separator */}
-                        <div className="dock-separator"></div>
-
-                        {/* Quick Actions */}
-                        <div className="dropdown dropup">
-                            <button className="dock-item" title="Quick Actions" data-bs-toggle="dropdown">
-                                <div className="dock-icon">
-                                    <i className="bi bi-plus-circle"></i>
-                                </div>
-                                <span className="dock-label">Quick</span>
-                            </button>
-                            <ul className="dropdown-menu dropdown-menu-end mb-3">
-                                <li><h6 className="dropdown-header">Aksi Cepat</h6></li>
-                                <li><Link className="dropdown-item" href="/laporan/create">
-                                    <i className="bi bi-file-earmark-plus me-2 text-primary"></i>Buat Laporan
-                                </Link></li>
-                                <li><Link className="dropdown-item" href="/pinjam-barang/create">
-                                    <i className="bi bi-box me-2 text-success"></i>Pinjam Barang
-                                </Link></li>
-                            </ul>
-                        </div>
-
-                        <Link href="/help" className="dock-item" title="Bantuan">
-                            <div className="dock-icon">
-                                <i className="bi bi-question-circle"></i>
-                            </div>
-                            <span className="dock-label">Bantuan</span>
-                        </Link>
-                    </div>
-                </nav>
+          
 
 
             </div>

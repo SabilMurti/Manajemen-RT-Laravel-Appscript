@@ -42,12 +42,13 @@ Route::get('/auth/{provider}/callback', ProviderCallbackController::class)->name
 // });
 
 use App\Http\Controllers\WargaFormController;
+use App\Http\Controllers\HomeController;
 
 // middleware: auth + approved_or_pending
 Route::middleware(['auth', \App\Http\Middleware\EnsureUserApprovedOrPending::class])->group(function () {
 
 
-    Route::get('/home', [PengumumanController::class, 'home'])->name('home');
+    Route::get('/home', [HomeController::class, 'home'])->name('home');
 
 
     Route::middleware('role_status:admin_rt,approved')->group(function () {
@@ -82,6 +83,7 @@ Route::middleware(['auth', 'role_status:admin_rt,approved'])->prefix('admin')->n
 
     // Simpan perubahan role/status
     Route::put('warga/{user}/', [WargaController::class, 'update'])->name('warga.update');
+     Route::delete('warga/{id}', [WargaController::class, 'destroy'])->name('warga.destroy');
 });
 
 // Route untuk halaman management dan CRUD pengumuman

@@ -189,77 +189,89 @@ const PengumumanManagement: React.FC = () => {
           </div>
         )}
 
-        <div className="p-6 bg-white rounded-lg shadow-sm">
+        <div className="welcome-section " >
+          <div className="welcome-content">
+            <h1 className="welcome-title">Manajemen Pengumuman</h1>
+            <p className="welcome-subtitle">Kelola pengumuman untuk warga RT</p>
+          </div>
+          {/* <div className="welcome-stats">
+                        <div className="stat-badge">
+                            <i className="bi bi-bell-fill"></i>
+                            <span>3 New</span>
+                        </div>
+                    </div> */}
+        </div>
+
+
+
+        <div className="mileina-card pb-5">
           {/* Header */}
-          <div className="flex justify-between items-center mb-6">
-            <div>
-              <h1 className="text-2xl font-bold text-gray-900">Manajemen Pengumuman</h1>
-              <p className="text-gray-600 mt-1">Kelola pengumuman untuk warga RT</p>
-            </div>
+          
+
+          <div className="mileina-card-header mb-5">
+            <h3 className="card-title">Daftar Warga</h3>
             <button
-              onClick={openAddModal}
-              className="bg-blue-600 hover:bg-blue-700 text-white px-4 py-2 rounded-lg flex items-center space-x-2 transition-colors"
-            >
-              <Plus className="w-4 h-4" />
-              <span>Tambah Pengumuman</span>
-            </button>
+                onClick={openAddModal}
+                className="mileina-btn mileina-btn-primary flex items-center gap-2"
+              >
+                <i className="bi bi-plus-lg"></i>
+                <span>Tambah Pengumuman</span>
+              </button>
+            <div className="card-actions">
+              
+              <div className="search-box ">
+                <i className="bi bi-search"></i>
+                <input
+                  type="text"
+                  placeholder="Cari warga..."
+                  value={searchQuery}
+                  onChange={(e) => setSearchQuery(e.target.value)}
+                />
+
+              </div>
+            </div>
           </div>
 
-          {/* Search */}
-          <div className="flex flex-col md:flex-row gap-4 mb-6">
-            <div className="flex-1 relative">
-              <Search className="absolute left-3 top-1/2 transform -translate-y-1/2 text-gray-400 w-4 h-4" />
-              <input
-                type="text"
-                placeholder="Cari pengumuman..."
-                value={searchQuery}
-                onChange={(e) => setSearchQuery(e.target.value)}
-                className="w-full pl-10 pr-4 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-transparent"
-              />
-            </div>
-          </div>
+
 
           {/* Bulk Actions */}
           {selectedItems.length > 0 && (
-            <div className="mb-4 p-3 bg-blue-50 rounded-lg flex items-center justify-between">
-              <span className="text-blue-700 font-medium">
-                {selectedItems.length} item dipilih
-              </span>
+            <div className="mileina-alert mileina-alert-info mb-4 flex justify-between items-center">
+              <span>{selectedItems.length} item dipilih</span>
               <button
                 onClick={handleBulkDelete}
-                className="bg-red-600 hover:bg-red-700 text-white px-3 py-1 rounded text-sm flex items-center space-x-1"
+                className="mileina-btn mileina-btn-danger mileina-btn-sm flex items-center gap-1"
               >
-                <Trash2 className="w-4 h-4" />
+                <i className="bi bi-trash"></i>
                 <span>Hapus Terpilih</span>
               </button>
             </div>
           )}
 
           {/* Table */}
-          <div className="overflow-x-auto">
-            <table className="w-full border-collapse border border-gray-200">
+          <div className="mileina-table-container overflow-x-auto ">
+            <table className="mileina-table shadow mb-3">
               <thead>
-                <tr className="bg-gray-50">
-                  <th className="border border-gray-200 p-3 text-left">
+                <tr>
+                  <th>
                     <input
                       type="checkbox"
                       checked={selectedItems.length === filteredPengumuman.length && filteredPengumuman.length > 0}
                       onChange={toggleSelectAll}
-                      className="rounded"
                     />
                   </th>
-                  <th className="border border-gray-200 p-3 text-left font-semibold">Judul</th>
-                  <th className="border border-gray-200 p-3 text-left font-semibold">Tanggal</th>
-                  <th className="border border-gray-200 p-3 text-left font-semibold">Dibuat Oleh</th>
-                  <th className="border border-gray-200 p-3 text-center font-semibold">Aksi</th>
+                  <th>Judul</th>
+                  <th>Tanggal</th>
+                  <th>Dibuat Oleh</th>
+                  <th className="text-center">Aksi</th>
                 </tr>
               </thead>
               <tbody>
                 {filteredPengumuman.length === 0 ? (
                   <tr>
-                    <td colSpan={5} className="border border-gray-200 p-8 text-center text-gray-500">
+                    <td colSpan={5} className="text-center py-8 text-gray-500">
                       <div className="flex flex-col items-center space-y-2">
-                        <AlertCircle className="w-8 h-8 text-gray-400" />
+                        <i className="bi bi-exclamation-circle text-2xl text-gray-400"></i>
                         <span>Tidak ada pengumuman ditemukan</span>
                       </div>
                     </td>
@@ -267,60 +279,57 @@ const PengumumanManagement: React.FC = () => {
                 ) : (
                   filteredPengumuman.map((pengumuman) => (
                     <tr key={pengumuman.pengumuman_id} className="hover:bg-gray-50">
-                      <td className="border border-gray-200 p-3">
+                      <th>
                         <input
                           type="checkbox"
                           checked={selectedItems.includes(pengumuman.pengumuman_id)}
                           onChange={() => toggleSelectItem(pengumuman.pengumuman_id)}
-                          className="rounded"
                         />
-                      </td>
-                      <td className="border border-gray-200 p-3">
+                      </th>
+                      <td>
                         <div>
-                          <div className="font-medium text-gray-900">{pengumuman.judul}</div>
+                          <div className="font-semibold text-gray-800">{pengumuman.judul}</div>
                           <div className="text-sm text-gray-500 mt-1 line-clamp-2">
                             {pengumuman.isi.length > 100
                               ? `${pengumuman.isi.substring(0, 100)}...`
-                              : pengumuman.isi
-                            }
+                              : pengumuman.isi}
                           </div>
                         </div>
                       </td>
-                      <td className="border border-gray-200 p-3">
-                        <div className="flex items-center space-x-1 text-sm text-gray-600">
-                          <Calendar className="w-4 h-4" />
-                          <span>{new Date(pengumuman.tanggal).toLocaleDateString('id-ID')}</span>
+                      <td>
+                        <div className="text-sm text-gray-600 flex items-center gap-1">
+                          <i className="bi bi-calendar-event"></i>
+                          {new Date(pengumuman.tanggal).toLocaleDateString('id-ID')}
                         </div>
                       </td>
-                      <td className="border border-gray-200 p-3">
-                        <div className="flex items-center space-x-1 text-sm text-gray-600">
-                          <User className="w-4 h-4" />
-                          <span>{pengumuman.dibuat_oleh}</span>
+                      <td>
+                        <div className="text-sm text-gray-600 flex items-center gap-1">
+                          <i className="bi bi-person-circle"></i>
+                          {pengumuman.dibuat_oleh}
                         </div>
                       </td>
-                      <td className="border border-gray-200 p-3">
-                        <div className="flex items-center justify-center space-x-1">
+                      <td>
+                        <div className="flex gap-2 justify-center">
                           <button
                             onClick={() => handleViewDetail(pengumuman)}
-                            className="p-1 text-blue-600 hover:bg-blue-100 rounded"
+                            className="mileina-btn mileina-btn-outline mileina-btn-sm"
                             title="Lihat Detail"
                           >
-                            <Eye className="w-4 h-4" />
+                            <i className="bi bi-eye"></i>
                           </button>
-
                           <button
                             onClick={() => handleEdit(pengumuman)}
-                            className="p-1 text-yellow-600 hover:bg-yellow-100 rounded"
+                            className="mileina-btn mileina-btn-warning mileina-btn-sm"
                             title="Edit"
                           >
-                            <Edit className="w-4 h-4" />
+                            <i className="bi bi-pencil"></i>
                           </button>
                           <button
                             onClick={() => handleDelete(pengumuman)}
-                            className="p-1 text-red-600 hover:bg-red-100 rounded"
+                            className="mileina-btn mileina-btn-danger mileina-btn-sm"
                             title="Hapus"
                           >
-                            <Trash2 className="w-4 h-4" />
+                            <i className="bi bi-trash"></i>
                           </button>
                         </div>
                       </td>
@@ -331,6 +340,7 @@ const PengumumanManagement: React.FC = () => {
             </table>
           </div>
         </div>
+
 
         {/* Add/Edit Modal */}
         {showModal && (

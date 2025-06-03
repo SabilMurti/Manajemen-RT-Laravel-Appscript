@@ -21,7 +21,7 @@ const AdminLayout: React.FC<AdminLayoutProps> = ({ children, title = 'Admin Dash
     const user = auth?.user as User;
 
     const userName = auth?.warga?.nama;
-  
+
 
 
     // Mendapatkan inisial dari nama user untuk avatar
@@ -64,7 +64,7 @@ const AdminLayout: React.FC<AdminLayoutProps> = ({ children, title = 'Admin Dash
                 <nav className="navbar navbar-expand-lg navbar-light bg-white shadow-sm border-bottom">
                     <div className="container-fluid px-4">
                         {/* Brand */}
-                        <Link href="/admin/dashboard" className="navbar-brand d-flex align-items-center">
+                        <Link href="/admin/dashboard" className="navbar-brand d-flex align-items-center me-auto">
                             <div className="bg-primary rounded-3 p-2 me-3">
                                 <i className="bi bi-shield-fill-check text-white fs-5"></i>
                             </div>
@@ -72,9 +72,18 @@ const AdminLayout: React.FC<AdminLayoutProps> = ({ children, title = 'Admin Dash
                         </Link>
 
                         {/* Mobile toggle */}
-                        <button className="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav">
-                            <span className="navbar-toggler-icon"></span>
-                        </button>
+                        <div className="d-flex ms-auto">
+
+                            <div className="bg-primary rounded-circle d-flex align-items-center justify-content-center me-2" style={{ width: '32px', height: '32px' }}>
+                                {user?.avatar ? (
+                                    <img src={user.avatar} alt="Avatar" className="rounded-circle" style={{ width: '32px', height: '32px' }} />
+                                ) : (
+                                    <span className="text-white fw-bold small">{user?.name ? getUserInitials(user.name) : 'A'}</span>
+                                )}
+                            </div>
+                            <span className="fw-semibold d-inline text-uppercase fw-bold mt-1">{userName}</span>
+                        </div>
+
 
 
 
@@ -83,20 +92,13 @@ const AdminLayout: React.FC<AdminLayoutProps> = ({ children, title = 'Admin Dash
                             <ul className="navbar-nav align-items-center">
                                 {/* Notifications */}
                                 <div className="nav-item dropdown">
-                                    <button className="btn btn-white shadow-sm d-flex align-items-center decoration-none" data-bs-toggle="dropdown">
-                                        <div className="bg-primary rounded-circle d-flex align-items-center justify-content-center me-2" style={{ width: '32px', height: '32px' }}>
-                                            {user?.avatar ? (
-                                                <img src={user.avatar} alt="Avatar" className="rounded-circle" style={{ width: '32px', height: '32px' }} />
-                                            ) : (
-                                                <span className="text-white fw-bold small">{user?.name ? getUserInitials(user.name) : 'A'}</span>
-                                            )}
-                                        </div>
-                                        <span className="fw-semibold">{userName}</span>
-                                        <i className="bi bi-chevron-down ms-2"></i>
-                                    </button>
+
+
+                                    {/* <i className="bi bi-chevron-down ms-2"></i> */}
+
                                     <ul className="dropdown-menu dropdown-menu-end">
-                                        <li><Link className="dropdown-item" href="/admin/profile"><i className="bi bi-person me-2"></i>Profile</Link></li>
-                                        <li><Link className="dropdown-item" href="/admin/settings"><i className="bi bi-gear me-2"></i>Pengaturan</Link></li>
+                                        {/* <li><Link className="dropdown-item" href="/admin/profile"><i className="bi bi-person me-2"></i>Profile</Link></li>
+                                        <li><Link className="dropdown-item" href="/admin/settings"><i className="bi bi-gear me-2"></i>Pengaturan</Link></li> */}
                                         <li><hr className="dropdown-divider" /></li>
                                         <li>
                                             <Link href="/logout" method="post" as="button" className="dropdown-item text-danger">
@@ -106,6 +108,7 @@ const AdminLayout: React.FC<AdminLayoutProps> = ({ children, title = 'Admin Dash
                                     </ul>
                                 </div>
                                 {/* User Menu */}
+
 
                             </ul>
                         </div>
@@ -137,17 +140,10 @@ const AdminLayout: React.FC<AdminLayoutProps> = ({ children, title = 'Admin Dash
 
                                 <hr className="my-4" />
 
-                                <h6 className="text-muted text-uppercase fw-bold small mb-3">Lainnya</h6>
-                                <nav className="nav flex-column">
-                                    <Link href="/admin/help" className="nav-link text-dark rounded-3 mb-1">
-                                        <i className="bi bi-question-circle me-3"></i>
-                                        <span>Bantuan</span>
-                                    </Link>
-                                    <Link href="/admin/backup" className="nav-link text-dark rounded-3 mb-1">
-                                        <i className="bi bi-cloud-arrow-up me-3"></i>
-                                        <span>Backup Data</span>
-                                    </Link>
-                                </nav>
+                                <Link href="/logout" method="post" as="button" className="dropdown-item text-danger">
+                                    <i className="bi bi-box-arrow-right me-2"></i>Logout
+                                </Link>
+
                             </div>
                         </div>
 
@@ -175,6 +171,10 @@ const AdminLayout: React.FC<AdminLayoutProps> = ({ children, title = 'Admin Dash
                                     <small className="mt-1">{item.label.split(' ')[0]}</small>
                                 </Link>
                             ))}
+                            <Link href="/logout" method="post" as="button" className="btn btn-sm d-flex flex-column align-items-center">
+                                <i className="bi bi-box-arrow-right fs-5"></i>
+                                <small className="mt-1">Log-out</small>
+                            </Link>
                         </div>
                     </div>
                 </nav>

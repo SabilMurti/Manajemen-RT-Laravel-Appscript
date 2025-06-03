@@ -30,6 +30,8 @@ class KasService
                     'api_key' => $this->apiKey,
                     'action' => 'kas',
                 ]);
+            
+                // dd($response->body());
 
             if ($response->successful()) {
                 return $response->json() ?? [];
